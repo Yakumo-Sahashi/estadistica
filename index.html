@@ -4,15 +4,107 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="icon" type="image/ico" href="public/img/loader.webp">
+    <link rel="stylesheet" href="public/css/b5/bootstrap.css">
+    <link rel="stylesheet" href="public/css/dataTable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="public/css/main.css">
     <script src="public/js/font_awesome/all.js"></script>
     <script src="public/js/swal/swal.js"></script>
     <script src="public/js/jquery/jquery.js"></script>
     <script src="public/js/poper/popper.js"></script>
     <script src="public/js/b5/bootstrap.js"></script>
-    <title>ES6</title>
+    <script src="public/js/dataTable/jquery.dataTables.min.js"></script>
+    <script src="public/js/dataTable/dataTables.bootstrap5.min.js"></script>
+    <script src="controller/main.js"></script>
+    <title>Math Code V1.0</title>
 </head>
 <body>
-    <script src="controller/examenu1/examen.js"></script>
+    <div class="contenedor" id="contenedor">
+        <div class="loader-container">
+            <div class="loader"></div>
+            <div class="loader2"></div>
+            <img class="img-load" src="public/img/loader.webp" alt="">
+        </div>
+    </div>
+    <div class="min-vh-100 d-flex flex-column justify-content-between">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 mb-4"></div>
+                <div class="col-md-12 text-center mb-3">
+                    <h1 class="display-4">Math Code V1.0</h1>
+                    <hr>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="datos" class="mb-3"><i class="fa-solid fa-list-check"></i> Ingresa la lista de datos a evaluar</label>
+                    <textarea class="form-control border border-success" name="datos" id="datos" cols="30" rows="15" placeholder="Ejemplo:
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+                    "></textarea>
+                </div>
+                <div class="col-md-5 mb-3 text-center">
+                    <h2>Listado de contenido</h2>
+                    <table class="table table-hover table-sm table-responsive-lg text-center" id="table_created_rooms">
+                        <thead class="text-center fw-bolder">
+                            <th>No.</th>
+                            <th>Dato</th>
+                        </thead>
+                        <tbody id="tabla_contenido"></tbody>
+                    </table>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="row bg-light border border-primary">
+                        <div class="col-12">
+                            <button class="btn btn-primary btn-block mt-3 btn-lg" type="button" onclick="calcular()"><i class="fa-solid fa-calculator"></i> Calcular</button>
+                            <button class="btn btn-danger btn-block mt-3" type="button" onclick="limpiar()"><i class="fa-solid fa-broom"></i> Limpiar contenido</button>
+                            <hr>
+                            <h1>Resultados</h1>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control text-secondary" name="moda" placeholder="Moda" readonly>
+                                <label for="moda" class="form-label text-primary"><i class="fa-solid fa-calculator me-2"></i>Moda</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control text-secondary" name="media" placeholder="Media" readonly>
+                                <label for="media" class="form-label text-primary"><i class="fa-solid fa-calculator me-2"></i>Media</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control text-secondary" name="mediana" placeholder="Mediana" readonly>
+                                <label for="mediana" class="form-label text-primary"><i class="fa-solid fa-calculator me-2"></i>Mediana</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card rounded-0 redes bg-dark" id="redes">
+        <div class="card-body">
+            <div class="container-fluid text-white">
+                <div class="row justify-content-between">
+                    <div class="col-4 col-md-2">
+                        <img src="public/img/loader.webp" title="Gon" class="img img-fluid py-2 mx-auto d-block">
+                    </div>
+                    <div class="col-8 col-md-5 align-self-center" style="border-right: 1px  solid #fff;">
+                        <h4>Math Code V1.0</h4>
+                        <h5>Code by: Yakumo Sahashi</h5>
+                        <p class="text-muted">Ultima actualizacion: Septiembre 2022</p>
+                    </div>
+                    <div class="col-12 col-md-5 text-center align-self-center" >
+                        <p>TecNM Campus Milpa Alta II</p>
+                        <h5>Ing. en Sistemas Computacionales</h5>
+                        <p class="text-muted"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
