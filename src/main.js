@@ -1,9 +1,20 @@
 window.onload = () => {
     var carga = document.getElementById('contenedor');
+    $('[name=datos]').val("");
     carga.style.visibility = 'hidden';
     carga.style.opacity = '0';
 }
 
+$(document).ready(() => {
+	let altura= $('.menu').offset().top;
+	$(window).on('scroll',() => {
+		if ($(window).scrollTop() > altura) {
+			$('.menu').addClass('menu-fixed');
+		}else{
+			$('.menu').removeClass('menu-fixed');
+		}
+	});
+});
 
 let arreglo = new Array();
 let moda = {};
@@ -32,8 +43,9 @@ const generar_tabla = (contenido) => {
 const extraer_datos = () => {
     let texto = $('[name=datos]').val();
     let datos = texto.split(/\n/);
-    arreglo = datos;
-    generar_tabla(datos);
+    arreglo = (datos[datos.length-1] == "") ? datos.splice(0, datos.length-1) : datos;
+    console.log(arreglo)
+    generar_tabla(arreglo);
 }
 
 const calcular_media = () => {
@@ -55,9 +67,7 @@ const calcular_moda = () => {
             moda[dato] = 1;
         }
     });
-    console.log(moda)
     let calculo = Object.entries(moda).sort((elementoA, elementoB) =>  elementoA[1] - elementoB[1]);
-    console.log(calculo)
     let resultado = calculo[calculo.length - 1].toString();
     resultado = resultado.split(",");
     return resultado[0];
@@ -78,13 +88,6 @@ const calcular = () => {
     }
 }
 
-$(document).on('keyup', '[name=datos]', () => {
-    extraer_datos();
-    $(`[name=media]`).val(``);
-    $(`[name=mediana]`).val(``);
-    $(`[name=moda]`).val(``);
-});
-
 const limpiar = () => {
     arreglo = new Array();
     $(`[name=media]`).val(``);
@@ -100,3 +103,14 @@ const limpiar = () => {
         button: `Aceptar`,
     });
 }
+
+$(document).on('input', '[name=datos]', () => {
+    $(`[name=datos`).val($(`[name=datos]`).val().replace(/[^0-9\n]/g, ''));
+});
+
+$(document).on('keyup', '[name=datos]', () => {
+    extraer_datos();
+    $(`[name=media]`).val(``);
+    $(`[name=mediana]`).val(``);
+    $(`[name=moda]`).val(``);
+});

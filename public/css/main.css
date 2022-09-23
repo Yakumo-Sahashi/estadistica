@@ -85,7 +85,35 @@
     }
 }
 
+body {
+	background: url('../img/bg.webp') fixed no-repeat 0 0;
+	background-size: cover;
+	background-position: center center;
+} 
+
+
+.menu-fixed{ /*controla la posicion del nav*/
+	position: fixed;
+  	width: 100%;
+  	top:0;
+  	z-index: 1000;
+  	box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
+}
+
+.menu {
+	border-bottom: 2px solid var(--color-azul-cian);
+}
+
 .btn-block {
     display: block;
     width: 100%;
+}
+
+.fondo_transparente {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+input {
+    color: #000;
+    font-size: 18px;
 }

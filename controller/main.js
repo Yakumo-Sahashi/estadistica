@@ -2,10 +2,21 @@
 
 window.onload = function () {
   var carga = document.getElementById('contenedor');
+  $('[name=datos]').val("");
   carga.style.visibility = 'hidden';
   carga.style.opacity = '0';
 };
 
+$(document).ready(function () {
+  var altura = $('.menu').offset().top;
+  $(window).on('scroll', function () {
+    if ($(window).scrollTop() > altura) {
+      $('.menu').addClass('menu-fixed');
+    } else {
+      $('.menu').removeClass('menu-fixed');
+    }
+  });
+});
 var arreglo = new Array();
 var moda = {};
 
@@ -29,8 +40,9 @@ var generar_tabla = function generar_tabla(contenido) {
 var extraer_datos = function extraer_datos() {
   var texto = $('[name=datos]').val();
   var datos = texto.split(/\n/);
-  arreglo = datos;
-  generar_tabla(datos);
+  arreglo = datos[datos.length - 1] == "" ? datos.splice(0, datos.length - 1) : datos;
+  console.log(arreglo);
+  generar_tabla(arreglo);
 };
 
 var calcular_media = function calcular_media() {
@@ -56,11 +68,9 @@ var calcular_moda = function calcular_moda() {
       moda[dato] = 1;
     }
   });
-  console.log(moda);
   var calculo = Object.entries(moda).sort(function (elementoA, elementoB) {
     return elementoA[1] - elementoB[1];
   });
-  console.log(calculo);
   var resultado = calculo[calculo.length - 1].toString();
   resultado = resultado.split(",");
   return resultado[0];
@@ -81,13 +91,6 @@ var calcular = function calcular() {
   }
 };
 
-$(document).on('keyup', '[name=datos]', function () {
-  extraer_datos();
-  $("[name=media]").val("");
-  $("[name=mediana]").val("");
-  $("[name=moda]").val("");
-});
-
 var limpiar = function limpiar() {
   arreglo = new Array();
   $("[name=media]").val("");
@@ -103,3 +106,13 @@ var limpiar = function limpiar() {
     button: "Aceptar"
   });
 };
+
+$(document).on('input', '[name=datos]', function () {
+  $("[name=datos").val($("[name=datos]").val().replace(/[^0-9\n]/g, ''));
+});
+$(document).on('keyup', '[name=datos]', function () {
+  extraer_datos();
+  $("[name=media]").val("");
+  $("[name=mediana]").val("");
+  $("[name=moda]").val("");
+});
