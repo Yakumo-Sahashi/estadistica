@@ -41,7 +41,6 @@ var extraer_datos = function extraer_datos() {
   var texto = $('[name=datos]').val();
   var datos = texto.split(/\n/);
   arreglo = datos[datos.length - 1] == "" ? datos.splice(0, datos.length - 1) : datos;
-  console.log(arreglo);
   generar_tabla(arreglo);
 };
 

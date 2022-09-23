@@ -44,7 +44,6 @@ const extraer_datos = () => {
     let texto = $('[name=datos]').val();
     let datos = texto.split(/\n/);
     arreglo = (datos[datos.length-1] == "") ? datos.splice(0, datos.length-1) : datos;
-    console.log(arreglo)
     generar_tabla(arreglo);
 }
 
