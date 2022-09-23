@@ -27,7 +27,7 @@ const generar_tabla = (contenido) => {
     contenido.map(dato => {
         tabla += `
         <tr> 
-            <td>${num}</td>
+            <td>${num <= 9 ? ('0' + num) : num}</td>
             <td>${dato}</td>
         </tr>`;
         num++;

@@ -26,7 +26,7 @@ var generar_tabla = function generar_tabla(contenido) {
   var tabla = "";
   var num = 1;
   contenido.map(function (dato) {
-    tabla += "\n        <tr> \n            <td>".concat(num, "</td>\n            <td>").concat(dato, "</td>\n        </tr>");
+    tabla += "\n        <tr> \n            <td>".concat(num <= 9 ? '0' + num : num, "</td>\n            <td>").concat(dato, "</td>\n        </tr>");
     num++;
   });
   $("#tabla_contenido").html("".concat(tabla));
