@@ -18,15 +18,49 @@ $(document).ready(function () {
   });
 });
 var arreglo = new Array();
+var xili = 0;
+var xil = 0;
 var moda = {};
 
+var valor_absoluto = function valor_absoluto(valor_observado, media) {
+  return Math.abs(valor_observado - media);
+};
+
+var valor_absoluto_org = function valor_absoluto_org(valor_observado, media) {
+  return valor_observado - media;
+};
+
+var valor_absoluto_cuadrado = function valor_absoluto_cuadrado(valor_observado, media) {
+  return Math.pow(Math.abs(valor_observado - media), 2);
+};
+
+var distribucion_muestral = function distribucion_muestral() {
+  return xili / arreglo.length;
+};
+
+var calcular_rango = function calcular_rango() {
+  return arreglo[0] - arreglo[arreglo.length - 1];
+};
+
+var calcular_varianza = function calcular_varianza() {
+  return xil / (arreglo.length - 1);
+};
+
+var desviasion_estandar = function desviasion_estandar() {
+  return Math.sqrt(calcular_varianza());
+};
+
 var generar_tabla = function generar_tabla(contenido) {
+  xili = 0;
+  xil = 0;
   $("#tabla_contenido").html("");
   $('#table_created_rooms').DataTable().destroy();
   var tabla = "";
   var num = 1;
   contenido.map(function (dato) {
-    tabla += "\n        <tr> \n            <td>".concat(num <= 9 ? '0' + num : num, "</td>\n            <td>").concat(dato, "</td>\n        </tr>");
+    xili += valor_absoluto(dato, calcular_media());
+    xil += valor_absoluto_cuadrado(dato, calcular_media());
+    tabla += "\n        <tr> \n            <td>".concat(num <= 9 ? '0' + num : num, "</td>\n            <td>").concat(dato, "</td>\n            <td>").concat(valor_absoluto(dato, calcular_media()), "</td>\n            <td>").concat(valor_absoluto_org(dato, calcular_media()), "</td>\n            <td>").concat(valor_absoluto_cuadrado(dato, calcular_media()), "</td>\n        </tr>");
     num++;
   });
   $("#tabla_contenido").html("".concat(tabla));
@@ -79,7 +113,11 @@ var calcular = function calcular() {
   if (arreglo != "") {
     $("[name=media]").val(calcular_media());
     $("[name=mediana]").val(calcular_mediana());
-    $("[name=moda]").val(calcular_moda);
+    $("[name=moda]").val(calcular_moda());
+    $("[name=dm]").val(distribucion_muestral());
+    $("[name=rango]").val(calcular_rango());
+    $("[name=varianza]").val(calcular_varianza());
+    $("[name=de]").val(desviasion_estandar());
   } else {
     swal({
       title: "Error!",
@@ -96,6 +134,10 @@ var limpiar = function limpiar() {
   $("[name=mediana]").val("");
   $("[name=moda]").val("");
   $("[name=datos]").val("");
+  $("[name=dm]").val("");
+  $("[name=rango]").val("");
+  $("[name=varianza]").val("");
+  $("[name=de]").val("");
   $('#table_created_rooms').DataTable().destroy();
   $("#tabla_contenido").html("");
   swal({
