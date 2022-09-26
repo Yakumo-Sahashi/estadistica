@@ -81,7 +81,7 @@ const extraer_datos = () => {
     let texto = $('[name=datos]').val();
     let datos = texto.split(/\n/);
     arreglo = (datos[datos.length - 1] == "") ? datos.splice(0, datos.length - 1) : datos;
-    generar_tabla(arreglo);
+    //generar_tabla(arreglo);
 }
 
 const calcular_media = () => {
@@ -110,6 +110,7 @@ const calcular_moda = () => {
 }
 
 const calcular = () => {
+    generar_tabla(arreglo);
     if (arreglo != "") {
         $(`[name=media]`).val(calcular_media());
         $(`[name=mediana]`).val(calcular_mediana());

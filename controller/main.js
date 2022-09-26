@@ -74,8 +74,7 @@ var generar_tabla = function generar_tabla(contenido) {
 var extraer_datos = function extraer_datos() {
   var texto = $('[name=datos]').val();
   var datos = texto.split(/\n/);
-  arreglo = datos[datos.length - 1] == "" ? datos.splice(0, datos.length - 1) : datos;
-  generar_tabla(arreglo);
+  arreglo = datos[datos.length - 1] == "" ? datos.splice(0, datos.length - 1) : datos; //generar_tabla(arreglo);
 };
 
 var calcular_media = function calcular_media() {
@@ -110,6 +109,8 @@ var calcular_moda = function calcular_moda() {
 };
 
 var calcular = function calcular() {
+  generar_tabla(arreglo);
+
   if (arreglo != "") {
     $("[name=media]").val(calcular_media());
     $("[name=mediana]").val(calcular_mediana());
