@@ -108,6 +108,40 @@ var calcular_moda = function calcular_moda() {
   return resultado[0];
 };
 
+var graficar = function graficar() {
+  new Morris.Bar({
+    element: 'myfirstchart',
+    data: [{
+      x: 'Moda',
+      y: $("[name=moda]").val()
+    }, {
+      x: 'Media',
+      y: $("[name=media]").val()
+    }, {
+      x: 'Mediana',
+      y: $("[name=mediana]").val()
+    }, {
+      x: 'Distribución Muestral',
+      y: $("[name=dm]").val()
+    }, {
+      x: 'Rango',
+      y: $("[name=rango]").val()
+    }, {
+      x: 'Varianza',
+      y: $("[name=varianza]").val()
+    }, {
+      x: 'Desviación Estandar',
+      y: $("[name=de]").val()
+    }],
+
+    /* barColors: ['#0063f8','#00f80c','#f8e800','#f83a00','#2d00f8','#f800ec','#f80000'], */
+    xkey: 'x',
+    ykeys: ['y'],
+    labels: ['Resultado'],
+    resize: true
+  });
+};
+
 var calcular = function calcular() {
   generar_tabla(arreglo);
 
@@ -119,6 +153,9 @@ var calcular = function calcular() {
     $("[name=rango]").val(calcular_rango());
     $("[name=varianza]").val(calcular_varianza());
     $("[name=de]").val(desviasion_estandar());
+    graficar();
+    $("#resultados").removeClass('d-none');
+    $("#titulo").removeClass('d-none');
   } else {
     swal({
       title: "Error!",
@@ -141,6 +178,9 @@ var limpiar = function limpiar() {
   $("[name=de]").val("");
   $('#table_created_rooms').DataTable().destroy();
   $("#tabla_contenido").html("");
+  $("#resultados").addClass('d-none');
+  $("#titulo").addClass('d-none');
+  $("#myfirstchart").html('');
   swal({
     title: "Correcto!",
     text: "Los campos se han limpiado de manera correcta!",
@@ -157,4 +197,10 @@ $(document).on('keyup', '[name=datos]', function () {
   $("[name=media]").val("");
   $("[name=mediana]").val("");
   $("[name=moda]").val("");
+  $("[name=dm]").val("");
+  $("[name=rango]").val("");
+  $("[name=varianza]").val("");
+  $("[name=de]").val("");
+  $("#resultados").addClass('d-none');
+  $("#titulo").addClass('d-none');
 });
